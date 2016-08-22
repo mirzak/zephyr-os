@@ -72,4 +72,103 @@ config EXTI_STM32_EXTI15_10_IRQ_PRI
 	help
 	 IRQ priority of EXTI15:10 interrupt
 
+config EXTI_STM32_EXTI16_IRQ_PRI
+	int "EXTI16 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI16 interrupt
+
+config EXTI_STM32_EXTI18_IRQ_PRI
+	int "EXTI18 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI18 interrupt
+
+config EXTI_STM32_EXTI19_IRQ_PRI
+	int "EXTI19 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI19 interrupt
+
+config EXTI_STM32_EXTI20_IRQ_PRI
+	int "EXTI20 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI20 interrupt
+
+config EXTI_STM32_EXTI21_22_29_IRQ_PRI
+	int "EXTI 21,22,29 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI 21,22, 29 interrupts
+
+config EXTI_STM32_EXTI23_IRQ_PRI
+	int "EXTI23 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI23 interrupt
+
+config EXTI_STM32_EXTI24_IRQ_PRI
+	int "EXTI24 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI24 interrupt
+
+config EXTI_STM32_EXTI25_IRQ_PRI
+	int "EXTI25 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI25 interrupt
+
+config EXTI_STM32_EXTI26_IRQ_PRI
+	int "EXTI26 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI26 interrupt
+
+config EXTI_STM32_EXTI28_IRQ_PRI
+	int "EXTI28 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI28 interrupt
+
+config EXTI_STM32_EXTI30_31_32_IRQ_PRI
+	int "EXTI 30,31,32 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI 30,31 32 interrupts
+
+config EXTI_STM32_EXTI33_IRQ_PRI
+	int "EXTI33 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI33 interrupt
+
+config EXTI_STM32_EXTI34_IRQ_PRI
+	int "EXTI34 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI34 interrupt
+
+
+config EXTI_STM32_EXTI35_IRQ_PRI
+	int "EXTI35 IRQ priority"
+	depends on EXTI_STM32
+	default 0
+	help
+	 IRQ priority of EXTI35 interrupt
+
 endif # SOC_FAMILY_STM32
