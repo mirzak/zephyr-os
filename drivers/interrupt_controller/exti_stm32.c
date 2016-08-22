@@ -140,7 +140,7 @@ void stm32_exti_enable(struct device *dev, int line)
 	break;
 	}
 #else
-/* Print compile-time warning */
+#error "unsupported SOC series specified";
 #endif
 
 	__ASSERT(irqnum < 0,
