@@ -55,4 +55,6 @@ source "drivers/clock_control/Kconfig.quark_se"
 
 source "drivers/clock_control/Kconfig.stm32f10x"
 
+source "drivers/clock_control/Kconfig.stm32f3x"
+
 endif # CLOCK_CONTROL
