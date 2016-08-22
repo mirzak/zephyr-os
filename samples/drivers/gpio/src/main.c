@@ -135,6 +135,17 @@
 #define GPIO_OUT_PIN	8
 #define GPIO_INT_PIN	24
 #define GPIO_NAME	"GPIO_"
+#elif defined(CONFIG_GPIO_STM32)
+#define LED6_PIN	15
+#define LED8_PIN	14
+#define LED10_PIN	13
+#define LED9_PIN	12
+#define LED7_PIN	11
+#define LED5_PIN	10
+#define LED3_PIN	9
+#define LED4_PIN	8
+#define LEDn		8
+#define GPIO_NAME	"GPIO_"
 #endif
 
 #if defined(CONFIG_GPIO_DW_0)
@@ -143,24 +154,18 @@
 #define GPIO_DRV_NAME CONFIG_GPIO_QMSI_0_NAME
 #elif defined(CONFIG_GPIO_ATMEL_SAM3)
 #define GPIO_DRV_NAME CONFIG_GPIO_ATMEL_SAM3_PORTB_DEV_NAME
+#elif defined(CONFIG_GPIO_STM32)
+#define GPIO_DRV_NAME "GPIOE"
 #else
 #define GPIO_DRV_NAME "GPIO_0"
 #endif
-
-void gpio_callback(struct device *port,
-		   struct gpio_callback *cb, uint32_t pins)
-{
-	printk(GPIO_NAME "%d triggered\n", GPIO_INT_PIN);
-}
-
-static struct gpio_callback gpio_cb;
 
 void main(void)
 {
 	struct nano_timer timer;
 	void *timer_data[1];
 	struct device *gpio_dev;
-	int ret;
+	int ret, i;
 	int toggle = 1;
 
 	nano_timer_init(&timer, timer_data);
@@ -170,38 +175,22 @@ void main(void)
 		printk("Cannot find %s!\n", GPIO_DRV_NAME);
 	}
 
-	/* Setup GPIO output */
-	ret = gpio_pin_configure(gpio_dev, GPIO_OUT_PIN, (GPIO_DIR_OUT));
-	if (ret) {
-		printk("Error configuring " GPIO_NAME "%d!\n", GPIO_OUT_PIN);
+	for (i = 0; i < LEDn; i++) {
+		/* Setup GPIO output */
+		ret = gpio_pin_configure(gpio_dev, i + LEDn, (GPIO_DIR_OUT | GPIO_PUD_PULL_UP));
+		if (ret) {
+			printk("Error configuring " GPIO_NAME "%d!\n", i + LEDn);
+		}
 	}
 
-	/* Setup GPIO input, and triggers on rising edge. */
-	ret = gpio_pin_configure(gpio_dev, GPIO_INT_PIN,
-			(GPIO_DIR_IN | GPIO_INT | GPIO_INT_EDGE
-			 | GPIO_INT_ACTIVE_HIGH | GPIO_INT_DEBOUNCE));
-	if (ret) {
-		printk("Error configuring " GPIO_NAME "%d!\n", GPIO_INT_PIN);
-	}
-
-	gpio_init_callback(&gpio_cb, gpio_callback, BIT(GPIO_INT_PIN));
-
-	ret = gpio_add_callback(gpio_dev, &gpio_cb);
-	if (ret) {
-		printk("Cannot setup callback!\n");
-	}
-
-	ret = gpio_pin_enable_callback(gpio_dev, GPIO_INT_PIN);
-	if (ret) {
-		printk("Error enabling callback!\n");
-	}
 
 	while (1) {
-		printk("Toggling " GPIO_NAME "%d\n", GPIO_OUT_PIN);
-
-		ret = gpio_pin_write(gpio_dev, GPIO_OUT_PIN, toggle);
-		if (ret) {
-			printk("Error set " GPIO_NAME "%d!\n", GPIO_OUT_PIN);
+		for (i = 0; i < LEDn; i++) {
+			printk("Toggling " GPIO_NAME "%d\n", i + LEDn);
+			ret = gpio_pin_write(gpio_dev, i + LEDn, toggle);
+			if (ret) {
+				printk("Error set " GPIO_NAME "%d!\n", i + LEDn);
+			}
 		}
 
 		if (toggle) {
