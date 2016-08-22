@@ -41,5 +41,26 @@ struct stm32f3x_gpio {
 	uint32_t brr;
 };
 
+union __syscfg_exticr {
+	uint32_t val;
+	struct {
+		uint16_t rsvd__16_31;
+		uint16_t exti;
+	} bit;
+};
+
+/* 12.1 SYSCFG registers */
+struct stm32f3x_syscfg {
+	uint32_t cfgr1;
+	uint32_t rcr;
+	union __syscfg_exticr exticr1;
+	union __syscfg_exticr exticr2;
+	union __syscfg_exticr exticr3;
+	union __syscfg_exticr exticr4;
+	uint32_t cfgr2;
+	uint32_t cfgr3;
+	uint32_t rsvd[14];
+	uint32_t cfgr4;
+};
 
 #endif /* _STM32F3X_GPIO_REGISTERS_H_ */
