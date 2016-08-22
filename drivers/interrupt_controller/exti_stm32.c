@@ -70,7 +70,7 @@ struct stm32_exti_data {
 void stm32_exti_enable(struct device *dev, int line)
 {
 	volatile struct stm32_exti *exti = AS_EXTI(EXTI_BASE);
-	int irqnum;
+	int irqnum = -1;
 
 	ARG_UNUSED(dev);
 
@@ -142,6 +142,9 @@ void stm32_exti_enable(struct device *dev, int line)
 #else
 /* Print compile-time warning */
 #endif
+
+	__ASSERT(irqnum < 0,
+		"EXTI unsupported irqnum specified: %d", irqnum);
 
 	irq_enable(irqnum);
 }
