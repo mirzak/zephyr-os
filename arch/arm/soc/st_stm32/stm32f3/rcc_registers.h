@@ -101,7 +101,7 @@ union __rcc_cfgr {
 		uint32_t mco :3 __packed;
 		uint32_t rsvd__27 :1 __packed;
 		uint32_t mcof :1 __packed;
-		uint32_t mcopre :3 __packed;
+		uint32_t mcopre :2 __packed;
 		uint32_t pplnodiv :1 __packed;
 	} bit;
 };
